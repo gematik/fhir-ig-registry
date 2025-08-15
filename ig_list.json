@@ -56,17 +56,37 @@
                         "4.0.1"
                     ],
                     "url": "https://gematik.de/fhir/epa/1.0.5",
-                    "description": "ePA Basic IG 1.0.5"
+                    "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.0.5"
                 },
                 {
-                    "name": "ePA 3.0.5-1",
+                    "name": "ePA 3.0.6",
                     "ig-version": "1.0.6",
                     "package": "de.gematik.epa#1.0.6",
                     "fhir-version": [
                         "4.0.1"
                     ],
                     "url": "https://gematik.de/fhir/epa/1.0.6",
-                    "description": "ePA Basic IG 1.0.6"
+                    "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.0.6"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.6-1",
+                    "package": "de.gematik.epa#1.0.6-1",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa/1.0.6-1",
+                    "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.0.6-1"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.6-2",
+                    "package": "de.gematik.epa#1.0.6-2",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa/1.0.6-2",
+                    "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.0.6-2"
                 },
                 {
                     "name": "ePA 3.1.2",
@@ -76,7 +96,157 @@
                         "4.0.1"
                     ],
                     "url": "https://gematik.de/fhir/epa/1.1.5",
-                    "description": "ePA Basic IG 1.1.5"
+                    "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.1.5"
+                }
+            ]
+        },
+        {
+            "name": "IG TI Terminology",
+            "category": "gematik",
+            "npm-name": "de.gematik.terminology",
+            "description": "Implementation Guide TI Terminology",
+            "canonical": "https://gematik.de/fhir/terminology",
+            "ci-build": "https://gematik.de/fhir/terminology/build",
+            "editions": [
+                {
+                    "name": "ePA 3.0.5",
+                    "ig-version": "1.0.5",
+                    "package": "de.gematik.terminology#1.0.5",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/terminology/1.0.5",
+                    "description": "Implementation Guide TI Terminology Version 1.0.5"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.5-1",
+                    "package": "de.gematik.terminology#1.0.5-1",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/terminology/1.0.5-1",
+                    "description": "Implementation Guide TI Terminology Version 1.0.5-1"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.5-2",
+                    "package": "de.gematik.terminology#1.0.5-2",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/terminology/1.0.5-2",
+                    "description": "Implementation Guide TI Terminology Version 1.0.5-2"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.5-3",
+                    "package": "de.gematik.terminology#1.0.5-3",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/terminology/1.0.5-3",
+                    "description": "Implementation Guide TI Terminology Version 1.0.5-3"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.5-4",
+                    "package": "de.gematik.terminology#1.0.5-4",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/terminology/1.0.5-4",
+                    "description": "Implementation Guide TI Terminology Version 1.0.5-4"
+                },
+                {
+                    "name": "ePA 3.1.2",
+                    "ig-version": "1.0.6",
+                    "package": "de.gematik.terminology#1.0.6",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/terminology/1.0.6",
+                    "description": "Implementation Guide TI Terminology Version 1.0.6"
+                }
+            ]
+        },
+        {
+            "name": "IG ePA Medication Service",
+            "category": "gematik",
+            "npm-name": "de.gematik.epa.medication",
+            "description": "Implementation Guide ePA Medication Service",
+            "canonical": "https://gematik.de/fhir/epa-medication",
+            "ci-build": "https://gematik.de/fhir/epa-medication/build/",
+            "editions": [
+                {
+                    "name": "ePA 3.0.5",
+                    "ig-version": "1.0.5",
+                    "package": "de.gematik.epa.medication#1.0.5",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-medication/1.0.5",
+                    "description": "Implementation Guide ePA Medication Service Version 1.0.5"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.6",
+                    "package": "de.gematik.epa.medication#1.0.6",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-medication/1.0.6",
+                    "description": "Implementation Guide ePA Medication Service Version 1.0.6"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.6-1",
+                    "package": "de.gematik.epa.medication#1.0.6-1",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-medication/1.0.6-1",
+                    "description": "Implementation Guide ePA Medication Service Version 1.0.6-1"
+                },
+                {
+                    "name": "ePA 3.0.6",
+                    "ig-version": "1.0.6-2",
+                    "package": "de.gematik.epa.medication#1.0.6-2",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-medication/1.0.6-2",
+                    "description": "Implementation Guide ePA Medication Service Version 1.0.6-2"
+                },
+                {
+                    "name": "ePA 3.1.2",
+                    "ig-version": "1.1.5",
+                    "package": "de.gematik.epa.medication#1.1.5",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-medication/1.1.5",
+                    "description": "Implementation Guide ePA Medication Service Version 1.1.5"
+                }
+            ]
+        },
+        {
+            "name": "IG ePA MHD Service",
+            "category": "gematik",
+            "npm-name": "de.gematik.epa.mhd",
+            "description": "Implementation Guide ePA MHD Service",
+            "canonical": "https://gematik.de/fhir/epa-mhd",
+            "ci-build": "https://gematik.de/fhir/epa-mhd/build/",
+            "editions": [
+                {
+                    "name": "ePA 3.1.2",
+                    "ig-version": "1.0.0",
+                    "package": "de.gematik.epa.mhd#1.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-mhd/1.0.0",
+                    "description": "Implementation Guide ePA MHD Service Version 1.0.0"
                 }
             ]
         }
