@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:fhir="http://hl7.org/fhir/feed" version="2.0">
-    <channel>
-        <title>gematik FHIR Implementation Guides</title>
-        <description>FHIR Implementation Guides published by gematik GmbH.</description>
-        <link>https://gematik.de/fhir/</link>
-        <generator>gematik GmbH</generator>
-    <lastBuildDate>Thu, 14 Aug 2025 10:42:05 +0200</lastBuildDate>
-        <atom:link href="https://gematik.de/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
-        <language>en</language>
-        <ttl>600</ttl>
+  <channel>
+    <title>gematik FHIR Implementation Guides</title>
+    <description>FHIR Implementation Guides published by gematik GmbH.</description>
+    <link>https://gematik.de/fhir/</link>
+    <generator>gematik GmbH</generator>
+    <lastBuildDate>Tue, 09 Sep 2025 13:31:18 +0200</lastBuildDate>
+    <atom:link href="https://gematik.de/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
+    <language>en</language>
+    <ttl>600</ttl>
     <item>
       <title>TI Common version 1.1.1-ballot.1</title>
       <description>TI Common IG 1.1.1-ballot.1</description>
@@ -68,6 +68,16 @@
       <fhir:version>4.0.1</fhir:version>
       <fhir:kind>IG</fhir:kind>
       <pubDate>Tue, 02 Sep 2025 17:01:15 +0200</pubDate>
+    </item>
+    <item>
+      <title>IG TI Terminology version 1.0.7</title>
+      <description>Implementation Guide TI Terminology Version 1.0.7</description>
+      <link>https://gematik.de/fhir/terminology/1.0.7/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/terminology/1.0.7/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Tue, 09 Sep 2025 13:31:18 +0200</pubDate>
     </item>
   </channel>
 </rss>
