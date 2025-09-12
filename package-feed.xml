@@ -4,7 +4,7 @@
     <description>FHIR Implementation Guides published by gematik GmbH.</description>
     <link>https://gematik.de/fhir/</link>
     <generator>gematik GmbH</generator>
-    <lastBuildDate>Wed, 10 Sep 2025 13:22:19 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 12 Sep 2025 10:35:18 +0200</lastBuildDate>
     <atom:link href="https://gematik.de/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
     <language>en</language>
@@ -108,6 +108,16 @@
       <fhir:version>4.0.1</fhir:version>
       <fhir:kind>IG</fhir:kind>
       <pubDate>Wed, 10 Sep 2025 13:22:19 +0200</pubDate>
+    </item>
+    <item>
+      <title>IG ePA Medication Service version 1.2.0</title>
+      <description>Implementation Guide ePA Medication Service Version 1.2.0</description>
+      <link>https://gematik.de/fhir/epa-medication/1.2.0/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa-medication/1.2.0/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 12 Sep 2025 10:35:18 +0200</pubDate>
     </item>
   </channel>
 </rss>
