@@ -9,7 +9,7 @@
             "ci-build": "https://gematik.de/fhir/ti/build",
             "editions": [
                 {
-                    "name": "ePA 3.0.5",
+                    "name": "TI",
                     "ig-version": "1.0.0",
                     "package": "de.gematik.ti#1.0.0",
                     "fhir-version": [
@@ -19,7 +19,7 @@
                     "description": "TI Common IG 1.0.0"
                 },
                 {
-                    "name": "ePA 3.0.5-1",
+                    "name": "TI",
                     "ig-version": "1.0.1",
                     "package": "de.gematik.ti#1.0.1",
                     "fhir-version": [
@@ -29,7 +29,7 @@
                     "description": "TI Common IG 1.0.1"
                 },
                 {
-                    "name": "ePA 3.1.2",
+                    "name": "TI",
                     "ig-version": "1.1.0",
                     "package": "de.gematik.ti#1.1.0",
                     "fhir-version": [
@@ -39,7 +39,7 @@
                     "description": "TI Common IG 1.1.0"
                 },
                 {
-                    "name": "ePA 3.1.3",
+                    "name": "TI-Ballot",
                     "ig-version": "1.1.1-ballot.1",
                     "package": "de.gematik.ti#1.1.1-ballot.1",
                     "fhir-version": [
@@ -49,7 +49,7 @@
                     "description": "TI Common IG 1.1.1-ballot.1"
                 },
                 {
-                    "name": "Release",
+                    "name": "TI",
                     "ig-version": "1.1.1",
                     "package": "de.gematik.ti#1.1.1",
                     "fhir-version": [
@@ -119,7 +119,7 @@
                     "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.1.5"
                 },
                 {
-                    "name": "ePA 3.1.3",
+                    "name": "ePA-Ballot 3.1.3",
                     "ig-version": "1.2.0-ballot.1",
                     "package": "de.gematik.epa#1.2.0-ballot.1",
                     "fhir-version": [
@@ -129,7 +129,7 @@
                     "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.2.0-ballot.1"
                 },
                 {
-                    "name": "ePA 3.1.3",
+                    "name": "ePA-Ballot 3.1.3",
                     "ig-version": "1.2.0-ballot.2",
                     "package": "de.gematik.epa#1.2.0-ballot.2",
                     "fhir-version": [
@@ -159,7 +159,7 @@
             "ci-build": "https://gematik.de/fhir/terminology/build",
             "editions": [
                 {
-                    "name": "ePA 3.0.5",
+                    "name": "TI",
                     "ig-version": "1.0.5",
                     "package": "de.gematik.terminology#1.0.5",
                     "fhir-version": [
@@ -169,7 +169,7 @@
                     "description": "Implementation Guide TI Terminology Version 1.0.5"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "TI",
                     "ig-version": "1.0.5-1",
                     "package": "de.gematik.terminology#1.0.5-1",
                     "fhir-version": [
@@ -179,7 +179,7 @@
                     "description": "Implementation Guide TI Terminology Version 1.0.5-1"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "TI",
                     "ig-version": "1.0.5-2",
                     "package": "de.gematik.terminology#1.0.5-2",
                     "fhir-version": [
@@ -189,7 +189,7 @@
                     "description": "Implementation Guide TI Terminology Version 1.0.5-2"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "TI",
                     "ig-version": "1.0.5-3",
                     "package": "de.gematik.terminology#1.0.5-3",
                     "fhir-version": [
@@ -199,7 +199,7 @@
                     "description": "Implementation Guide TI Terminology Version 1.0.5-3"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "TI",
                     "ig-version": "1.0.5-4",
                     "package": "de.gematik.terminology#1.0.5-4",
                     "fhir-version": [
@@ -209,7 +209,7 @@
                     "description": "Implementation Guide TI Terminology Version 1.0.5-4"
                 },
                 {
-                    "name": "ePA 3.1.2",
+                    "name": "TI",
                     "ig-version": "1.0.6",
                     "package": "de.gematik.terminology#1.0.6",
                     "fhir-version": [
@@ -219,7 +219,7 @@
                     "description": "Implementation Guide TI Terminology Version 1.0.6"
                 },
                 {
-                    "name": "ePA 3.1.3",
+                    "name": "TI",
                     "ig-version": "1.0.7",
                     "package": "de.gematik.terminology#1.0.7",
                     "fhir-version": [
@@ -289,7 +289,7 @@
                     "description": "Implementation Guide ePA Medication Service Version 1.1.5"
                 },
                 {
-                    "name": "ePA 3.1.3",
+                    "name": "ePA-Ballot 3.1.3",
                     "ig-version": "1.2.0-ballot.1",
                     "package": "de.gematik.epa.medication#1.2.0-ballot.1",
                     "fhir-version": [
@@ -299,7 +299,7 @@
                     "description": "Implementation Guide ePA Medication Service Version 1.2.0-ballot.1"
                 },
                 {
-                    "name": "ePA 3.1.3",
+                    "name": "ePA-Ballot 3.1.3",
                     "ig-version": "1.2.0-ballot.2",
                     "package": "de.gematik.epa.medication#1.2.0-ballot.2",
                     "fhir-version": [
