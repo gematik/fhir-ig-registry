@@ -69,55 +69,5 @@
       <fhir:kind>IG</fhir:kind>
       <pubDate>Tue, 02 Sep 2025 17:01:15 +0200</pubDate>
     </item>
-    <item>
-      <title>IG TI Terminology version 1.0.7</title>
-      <description>Implementation Guide TI Terminology Version 1.0.7</description>
-      <link>https://gematik.de/fhir/terminology/1.0.7/package.tgz</link>
-      <guid isPermaLink="true">https://gematik.de/fhir/terminology/1.0.7/package.tgz</guid>
-      <dc:creator>gematik GmbH</dc:creator>
-      <fhir:version>4.0.1</fhir:version>
-      <fhir:kind>IG</fhir:kind>
-      <pubDate>Tue, 09 Sep 2025 13:31:18 +0200</pubDate>
-    </item>
-    <item>
-      <title>TI Common version 1.1.1</title>
-      <description>TI Common IG 1.1.1</description>
-      <link>https://gematik.de/fhir/ti/1.1.1/package.tgz</link>
-      <guid isPermaLink="true">https://gematik.de/fhir/ti/1.1.1/package.tgz</guid>
-      <dc:creator>gematik GmbH</dc:creator>
-      <fhir:version>4.0.1</fhir:version>
-      <fhir:kind>IG</fhir:kind>
-      <pubDate>Tue, 09 Sep 2025 16:47:04 +0200</pubDate>
-    </item>
-    <item>
-      <title>IG ePA Basic version 1.2.0</title>
-      <description>Implementation Guide ePA Basisfunktionalit&#228;te Version 1.2.0</description>
-      <link>https://gematik.de/fhir/epa/1.2.0/package.tgz</link>
-      <guid isPermaLink="true">https://gematik.de/fhir/epa/1.2.0/package.tgz</guid>
-      <dc:creator>gematik GmbH</dc:creator>
-      <fhir:version>4.0.1</fhir:version>
-      <fhir:kind>IG</fhir:kind>
-      <pubDate>Wed, 10 Sep 2025 10:19:28 +0200</pubDate>
-    </item>
-    <item>
-      <title>IG ePA MHD Service version 1.0.1</title>
-      <description>Implementation Guide ePA MHD Service Version 1.0.1</description>
-      <link>https://gematik.de/fhir/epa-mhd/1.0.1/package.tgz</link>
-      <guid isPermaLink="true">https://gematik.de/fhir/epa-mhd/1.0.1/package.tgz</guid>
-      <dc:creator>gematik GmbH</dc:creator>
-      <fhir:version>4.0.1</fhir:version>
-      <fhir:kind>IG</fhir:kind>
-      <pubDate>Wed, 10 Sep 2025 13:22:19 +0200</pubDate>
-    </item>
-    <item>
-      <title>IG ePA Medication Service version 1.2.0</title>
-      <description>Implementation Guide ePA Medication Service Version 1.2.0</description>
-      <link>https://gematik.de/fhir/epa-medication/1.2.0/package.tgz</link>
-      <guid isPermaLink="true">https://gematik.de/fhir/epa-medication/1.2.0/package.tgz</guid>
-      <dc:creator>gematik GmbH</dc:creator>
-      <fhir:version>4.0.1</fhir:version>
-      <fhir:kind>IG</fhir:kind>
-      <pubDate>Fri, 12 Sep 2025 10:35:18 +0200</pubDate>
-    </item>
   </channel>
 </rss>
