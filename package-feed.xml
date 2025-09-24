@@ -1,13 +1,73 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:fhir="http://hl7.org/fhir/feed" version="2.0">
-    <channel>
-        <title>gematik FHIR Implementation Guides</title>
-        <description>FHIR Implementation Guides published by gematik GmbH.</description>
-        <link>https://gematik.de/fhir/</link>
-        <generator>gematik GmbH</generator>
-        <lastBuildDate>Fri, 01 Aug 2025 12:44:15 +0000</lastBuildDate>
-        <atom:link href="https://gematik.de/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
-        <language>en</language>
-        <ttl>600</ttl>
-    </channel>
+  <channel>
+    <title>gematik FHIR Implementation Guides</title>
+    <description>FHIR Implementation Guides published by gematik GmbH.</description>
+    <link>https://gematik.de/fhir/</link>
+    <generator>gematik GmbH</generator>
+    <lastBuildDate>Fri, 12 Sep 2025 10:35:18 +0200</lastBuildDate>
+    <atom:link href="https://gematik.de/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
+    <language>en</language>
+    <ttl>600</ttl>
+    <item>
+      <title>TI Common version 1.1.1-ballot.1</title>
+      <description>TI Common IG 1.1.1-ballot.1</description>
+      <link>https://gematik.de/fhir/ti/1.1.1-ballot.1/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/ti/1.1.1-ballot.1/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Wed, 13 Aug 2025 15:59:41 +0200</pubDate>
+    </item>
+    <item>
+      <title>IG ePA Basic version 1.2.0-ballot.1</title>
+      <description>Implementation Guide ePA Basisfunktionalit&#228;te Version 1.2.0-ballot.1</description>
+      <link>https://gematik.de/fhir/epa/1.2.0-ballot.1/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa/1.2.0-ballot.1/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 15 Aug 2025 07:39:07 +0200</pubDate>
+    </item>
+    <item>
+      <title>IG ePA Medication Service version 1.2.0-ballot.1</title>
+      <description>Implementation Guide ePA Medication Service Version 1.2.0-ballot.1</description>
+      <link>https://gematik.de/fhir/epa-medication/1.2.0-ballot.1/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa-medication/1.2.0-ballot.1/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 15 Aug 2025 08:26:42 +0200</pubDate>
+    </item>
+    <item>
+      <title>IG ePA MHD Service version 1.0.1-ballot.2</title>
+      <description>Implementation Guide ePA MHD Service Version 1.0.1-ballot.2</description>
+      <link>https://gematik.de/fhir/epa-mhd/1.0.1-ballot.2/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa-mhd/1.0.1-ballot.2/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 15 Aug 2025 10:29:38 +0200</pubDate>
+    </item>
+    <item>
+      <title>IG ePA Basic version 1.2.0-ballot.2</title>
+      <description>Implementation Guide ePA Basisfunktionalit&#228;te Version 1.2.0-ballot.2</description>
+      <link>https://gematik.de/fhir/epa/1.2.0-ballot.2/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa/1.2.0-ballot.2/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Tue, 02 Sep 2025 13:29:45 +0200</pubDate>
+    </item>
+    <item>
+      <title>IG ePA Medication Service version 1.2.0-ballot.2</title>
+      <description>Implementation Guide ePA Medication Service Version 1.2.0-ballot.2</description>
+      <link>https://gematik.de/fhir/epa-medication/1.2.0-ballot.2/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa-medication/1.2.0-ballot.2/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Tue, 02 Sep 2025 17:01:15 +0200</pubDate>
+    </item>
+  </channel>
 </rss>
