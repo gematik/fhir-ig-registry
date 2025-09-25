@@ -79,7 +79,7 @@
                     "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.0.5"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "ePA 3.0.5-2",
                     "ig-version": "1.0.6",
                     "package": "de.gematik.epa#1.0.6",
                     "fhir-version": [
@@ -89,7 +89,7 @@
                     "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.0.6"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "ePA 3.0.5-2",
                     "ig-version": "1.0.6-1",
                     "package": "de.gematik.epa#1.0.6-1",
                     "fhir-version": [
@@ -99,7 +99,7 @@
                     "description": "Implementation Guide ePA Basisfunktionalitäte Version 1.0.6-1"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "ePA 3.0.5-2",
                     "ig-version": "1.0.6-2",
                     "package": "de.gematik.epa#1.0.6-2",
                     "fhir-version": [
@@ -249,7 +249,7 @@
                     "description": "Implementation Guide ePA Medication Service Version 1.0.5"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "ePA 3.0.5-2",
                     "ig-version": "1.0.6",
                     "package": "de.gematik.epa.medication#1.0.6",
                     "fhir-version": [
@@ -259,7 +259,7 @@
                     "description": "Implementation Guide ePA Medication Service Version 1.0.6"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "ePA 3.0.5-2",
                     "ig-version": "1.0.6-1",
                     "package": "de.gematik.epa.medication#1.0.6-1",
                     "fhir-version": [
@@ -269,7 +269,7 @@
                     "description": "Implementation Guide ePA Medication Service Version 1.0.6-1"
                 },
                 {
-                    "name": "ePA 3.0.6",
+                    "name": "ePA 3.0.5-2",
                     "ig-version": "1.0.6-2",
                     "package": "de.gematik.epa.medication#1.0.6-2",
                     "fhir-version": [
