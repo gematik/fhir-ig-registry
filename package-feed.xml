@@ -50,6 +50,16 @@
       <pubDate>Fri, 15 Aug 2025 10:29:38 +0200</pubDate>
     </item>
     <item>
+      <title>IG ePA MHD Service version 1.0.1-ballot2</title>
+      <description>Implementation Guide ePA MHD Service Version 1.0.1-ballot2</description>
+      <link>https://gematik.de/fhir/epa-mhd/1.0.1-ballot.2/package_.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa-mhd/1.0.1-ballot.2/package_.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 15 Aug 2025 10:29:38 +0200</pubDate>
+    </item>
+    <item>
       <title>IG ePA Basic version 1.2.0-ballot.2</title>
       <description>Implementation Guide ePA Basisfunktionalit&#228;te Version 1.2.0-ballot.2</description>
       <link>https://gematik.de/fhir/epa/1.2.0-ballot.2/package.tgz</link>
