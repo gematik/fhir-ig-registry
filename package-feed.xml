@@ -12,8 +12,8 @@
     <item>
       <title>TI Common version 1.1.1-ballot.1</title>
       <description>TI Common IG 1.1.1-ballot.1</description>
-      <link>https://gematik.de/fhir/ti/1.1.1-ballot.1/package.tgz</link>
-      <guid isPermaLink="true">https://gematik.de/fhir/ti/1.1.1-ballot.1/package.tgz</guid>
+      <link>https://gemspec.gematik.de/ig/fhir/ti/1.1.1-ballot.1/package.tgz</link>
+      <guid isPermaLink="true">https://gemspec.gematik.de/ig/fhir/ti/1.1.1-ballot.1/package.tgz</guid>
       <dc:creator>gematik GmbH</dc:creator>
       <fhir:version>4.0.1</fhir:version>
       <fhir:kind>IG</fhir:kind>
