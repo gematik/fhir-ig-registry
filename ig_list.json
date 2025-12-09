@@ -57,6 +57,16 @@
                     ],
                     "url": "https://gematik.de/fhir/ti/1.1.1",
                     "description": "TI Common IG 1.1.1"
+                },
+                {
+                    "name": "TI",
+                    "ig-version": "1.2.0",
+                    "package": "de.gematik.ti#1.2.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/ti/1.2.0",
+                    "description": "TI Common IG 1.2.0"
                 }
             ]
         },
