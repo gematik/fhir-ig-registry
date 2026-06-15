@@ -427,6 +427,16 @@
                     ],
                     "url": "https://gematik.de/fhir/epa-medication/1.3.3",
                     "description": "Implementation Guide ePA Medication Service Version 1.3.3"
+                },
+                {
+                    "name": "ePA 3.1.3",
+                    "ig-version": "1.3.4",
+                    "package": "de.gematik.epa.medication#1.3.4",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-medication/1.3.4",
+                    "description": "Implementation Guide ePA Medication Service Version 1.3.4"
                 }
             ]
         },
