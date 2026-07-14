@@ -4,7 +4,7 @@
     <description>FHIR Implementation Guides published by gematik GmbH.</description>
     <link>https://gematik.de/fhir/</link>
     <generator>gematik GmbH</generator>
-    <lastBuildDate>Mon, 13 Jul 2026 14:12:09 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 11:33:14 +0000</lastBuildDate>
     <atom:link href="https://gemspec.gematik.de/ig/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
     <language>en</language>
@@ -128,6 +128,16 @@
       <fhir:version>4.0.1</fhir:version>
       <fhir:kind>IG</fhir:kind>
       <pubDate>Mon, 13 Jul 2026 14:12:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>de.gematik.epa#1.3.2</title>
+      <description>Implementation Guide ePA Basisfunktionalit&#228;te Version 1.3.2</description>
+      <link>https://gematik.de/fhir/epa/1.3.2/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/epa/1.3.2/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Tue, 14 Jul 2026 11:33:14 +0000</pubDate>
     </item>
   </channel>
 </rss>
