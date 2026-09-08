@@ -97,6 +97,16 @@
                     ],
                     "url": "https://gematik.de/fhir/ti/1.4.0-ballot.2",
                     "description": "TI Common IG 1.4.0-ballot.2"
+                },
+                {
+                    "name": "TI Vorabveröffentlichung",
+                    "ig-version": "1.4.0-ballot.3",
+                    "package": "de.gematik.ti#1.4.0-ballot.3",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/ti/1.4.0-ballot.3",
+                    "description": "Implementation Guide TI Common Version 1.4.0-ballot.3"
                 }
             ]
         },
