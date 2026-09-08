@@ -589,6 +589,192 @@
                     "description": "Dieser IG Beschreibt Schnittstellen und Profile für den Datenaustauch des digitalen Durchschlag E-T-Rezept zwischen E-Rezept-Fachdienst und BfArM T-Register in Version 1.2.0"
                 }
             ]
+        },
+        {
+            "name": "Health Data Device Transfer",
+            "category": "gematik",
+            "npm-name": "de.gematik.hddt",
+            "description": "Dieser IG beschreibt Schnittstellen und Profile für den Austausch zwischen Hilfmitteln und Implantaten und Digitalen Gesundheitsanwendungen DiGA",
+            "canonical": "https://gematik.de/fhir/hddt",
+            "editions":[
+                {
+                    "name": "HDDT 0.1.0",
+                    "ig-version": "0.1.0",
+                    "package": "de.gematik.hddt#0.1.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/hddt/0.1.0",
+                    "description": "Implementation Guide HDDT Version 0.1.0"
+                },
+                {
+                    "name": "HDDT 1.0.0-rc1",
+                    "ig-version": "1.0.0-rc1",
+                    "package": "de.gematik.hddt#1.0.0-rc1",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc1",
+                    "description": "Implementation Guide HDDT Version 1.0.0-rc1"
+                },
+                {
+                    "name": "HDDT 1.0.0-rc2",
+                    "ig-version": "1.0.0-rc2",
+                    "package": "de.gematik.hddt#1.0.0-rc2",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc2",
+                    "description": "Implementation Guide HDDT Version 1.0.0-rc2"
+                },
+                {
+                    "name": "HDDT 1.0.0",
+                    "ig-version": "1.0.0",
+                    "package": "de.gematik.hddt#1.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/hddt/1.0.0",
+                    "description": "Implementation Guide HDDT Version 1.0.0"
+                },
+                {
+                    "name": "HDDT 1.0.1",
+                    "ig-version": "1.0.1",
+                    "package": "de.gematik.hddt#1.0.1",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/hddt/1.0.1",
+                    "description": "Implementation Guide HDDT Version 1.0.1"
+                }
+            ]
+        },
+        {
+            "name": "ISiK",
+            "category": "gematik",
+            "npm-name": "de.gematik.isik",
+            "description": "Diese IGs beschreiben Schnittstellen und Profile für den Austausch zwischen Informations-Systemen im Krankenhaus (ISiK).",
+            "canonical": "https://gematik.de/fhir/isik",
+            "editions": [
+                {
+                    "name": "ISiK Basis 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/basis/6.0.0",
+                    "description": "Implementation Guide ISiK Basis Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Dokumentenaustausch 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/dokumentenaustausch/6.0.0",
+                    "description": "Implementation Guide ISiK Dokumentenaustauschmodul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Vitalparameter 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/vitalparameter/6.0.0",
+                    "description": "Implementation Guide ISiK Vitalparametermodul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Terminplanung 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/terminplanung/6.0.0",
+                    "description": "Implementation Guide ISiK Terminplanungsmodul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Medikation 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/medikation/6.0.0",
+                    "description": "Implementation Guide ISiK Medikationsmodul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK ICU 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/icu/6.0.0",
+                    "description": "Implementation Guide ISiK ICU-Normalstation-Modul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Labor 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/labor/6.0.0",
+                    "description": "Implementation Guide ISiK Labormodul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Connect 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/connect/6.0.0",
+                    "description": "Implementation Guide ISiK Connect-Modul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Subscriptions 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/subscriptions/6.0.0",
+                    "description": "Implementation Guide ISiK Subscription-Modul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Organspendeerkennung 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/organspendeerkennung/6.0.0",
+                    "description": "Implementation Guide ISiK Organspendeerkennung Version 6.0.0"
+                },
+                {
+                    "name": "ISiK AMTS 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/amts/6.0.0",
+                    "description": "Implementation Guide ISiK AMTS-Modul Version 6.0.0"
+                },
+                {
+                    "name": "ISiK Formular 6.0.0",
+                    "ig-version": "6.0.0",
+                    "package": "de.gematik.isik#6.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gemspec.gematik.de/fhir/ig/isik/formular/6.0.0",
+                    "description": "Implementation Guide ISiK Formular-Modul Version 6.0.0"
+                }
+            ]
         }
-    ]
-}
