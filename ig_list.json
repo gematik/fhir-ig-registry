@@ -619,6 +619,26 @@
                     "description": "Dieser IG Beschreibt Schnittstellen und Profile für den Datenaustauch des digitalen Durchschlag E-T-Rezept zwischen E-Rezept-Fachdienst und BfArM T-Register in Version 1.2.0"
                 }
             ]
+        },
+        {
+            "name": "ePA Laboratory Report Implementation Guide",
+            "category": "gematik",
+            "npm-name": "de.gematik.epa.laboratory",
+            "description": "Implementation Guide ePA Laboratory Report",
+            "canonical": "https://gematik.de/fhir/epa-laboratory",
+            "ci-build": "https://gematik.de/fhir/epa-laboratory/build",
+            "editions": [
+                {
+                    "name": "ePA 3.2.0 (ePA 27)",
+                    "ig-version": "1.0.0-ballot.1",
+                    "package": "de.gematik.epa.laboratory#1.0.0-ballot.1",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/epa-laboratory/1.0.0-ballot.1",
+                    "description": "ePA Laboratory Report Implementation Guide Version 1.0.0-ballot.1"
+                }
+            ]
         }
     ]
 }
