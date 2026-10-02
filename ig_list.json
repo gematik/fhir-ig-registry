@@ -656,7 +656,8 @@
             "npm-name": "de.gematik.hddt",
             "description": "Dieser IG beschreibt Schnittstellen und Profile für den Austausch zwischen Hilfmitteln und Implantaten und Digitalen Gesundheitsanwendungen DiGA",
             "canonical": "https://gematik.de/fhir/hddt",
-            "editions":[
+            "ci-build": "https://gematik.de/fhir/hddt/build",
+            "editions": [
                 {
                     "name": "HDDT 0.1.0",
                     "ig-version": "0.1.0",
@@ -715,6 +716,7 @@
             "npm-name": "de.gematik.isik",
             "description": "Diese IGs beschreiben Schnittstellen und Profile für den Austausch zwischen Informations-Systemen im Krankenhaus (ISiK).",
             "canonical": "https://gematik.de/fhir/isik",
+            "ci-build": "https://gematik.de/fhir/isik/build",
             "editions": [
                 {
                     "name": "ISiK Basis 6.0.0",
@@ -837,4 +839,106 @@
                     "description": "Implementation Guide ISiK Formular-Modul Version 6.0.0"
                 }
             ]
+        },
+        {
+            "name": "Implementation Guide TIFlow - Kernfunktionalitäten",
+            "category": "gematik",
+            "npm-name": "de.gematik.tiflow",
+            "description": "Implementation Guide TIFlow - Kernfunktionalitäten",
+            "canonical": "https://gematik.de/fhir/tiflow",
+            "ci-build": "https://gematik.de/fhir/tiflow/build",
+            "editions": [
+                {
+                    "name": "TIFlow",
+                    "ig-version": "2.0.0",
+                    "package": "de.gematik.tiflow#2.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/tiflow/2.0.0",
+                    "description": "TIFlow - Kernfunktionalitäten 2.0.0"
+                }
+            ]
+        },
+        {
+            "name": "Implementation Guide TIFlow - Datenaustausch BfArM Webdienst",
+            "category": "gematik",
+            "npm-name": "de.gematik.tiflow.bfarm",
+            "description": "Implementation Guide TIFlow - Datenaustausch BfArM Webdienst",
+            "canonical": "https://gematik.de/fhir/tiflow-bfarm",
+            "ci-build": "https://gematik.de/fhir/tiflow-bfarm/build",
+            "editions": [
+                {
+                    "name": "TIFlow",
+                    "ig-version": "2.0.0",
+                    "package": "de.gematik.tiflow.bfarm#2.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/tiflow-bfarm/2.0.0",
+                    "description": "TIFlow - Datenaustausch BfArM Webdienst 2.0.0"
+                }
+            ]
+        },
+        {
+            "name": "Implementation Guide TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA)",
+            "category": "gematik",
+            "npm-name": "de.gematik.tiflow.diga",
+            "description": "Implementation Guide TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA)",
+            "canonical": "https://gematik.de/fhir/tiflow-diga",
+            "ci-build": "https://gematik.de/fhir/tiflow-diga/build",
+            "editions": [
+                {
+                    "name": "TIFlow",
+                    "ig-version": "2.0.0",
+                    "package": "de.gematik.tiflow.diga#2.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/tiflow-diga/2.0.0",
+                    "description": "TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA) 2.0.0"
+                }
+            ]
+        },
+        {
+            "name": "Implementation Guide TIFlow - Abrechnungsinformationen",
+            "category": "gematik",
+            "npm-name": "de.gematik.tiflow.chargeitem",
+            "description": "Implementation Guide TIFlow - Abrechnungsinformationen",
+            "canonical": "https://gematik.de/fhir/tiflow-chargeitem",
+            "ci-build": "https://gematik.de/fhir/tiflow-chargeitem/build",
+            "editions": [
+                {
+                    "name": "TIFlow",
+                    "ig-version": "2.0.0",
+                    "package": "de.gematik.tiflow.chargeitem#2.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/tiflow-chargeitem/2.0.0",
+                    "description": "TIFlow - Abrechnungsinformationen 2.0.0"
+                }
+            ]
+        },
+        {
+            "name": "Implementation Guide TIFlow - Verordnungen für Arzneimittel",
+            "category": "gematik",
+            "npm-name": "de.gematik.tiflow.erezept",
+            "description": "Implementation Guide TIFlow - Verordnungen für Arzneimittel",
+            "canonical": "https://gematik.de/fhir/tiflow-erezept",
+            "ci-build": "https://gematik.de/fhir/tiflow-erezept/build",
+            "editions": [
+                {
+                    "name": "TIFlow",
+                    "ig-version": "2.0.0",
+                    "package": "de.gematik.tiflow.erezept#2.0.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/tiflow-erezept/2.0.0",
+                    "description": "TIFlow - Verordnungen für Arzneimittel 2.0.0"
+                }
+            ]
         }
+    ]
+}

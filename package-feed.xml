@@ -4,7 +4,7 @@
     <description>FHIR Implementation Guides published by gematik GmbH.</description>
     <link>https://gematik.de/fhir/</link>
     <generator>gematik GmbH</generator>
-    <lastBuildDate>Fri, 18 Sep 2026 12:30:32 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 12:53:25 +0200</lastBuildDate>
     <atom:link href="https://gemspec.gematik.de/ig/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
     <language>en</language>
@@ -238,6 +238,56 @@
       <fhir:version>4.0.1</fhir:version>
       <fhir:kind>IG</fhir:kind>
       <pubDate>Fri, 18 Sep 2026 12:30:32 +0200</pubDate>
+    </item>
+    <item>
+      <title>de.gematik.tiflow#2.0.0</title>
+      <description>TIFlow - Kernfunktionalit&#228;ten 2.0.0</description>
+      <link>https://gematik.de/fhir/tiflow/2.0.0/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/tiflow/2.0.0/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 02 Oct 2026 11:58:10 +0200</pubDate>
+    </item>
+    <item>
+      <title>de.gematik.tiflow.bfarm#2.0.0</title>
+      <description>TIFlow - Datenaustausch BfArM Webdienst 2.0.0</description>
+      <link>https://gematik.de/fhir/tiflow-bfarm/2.0.0/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/tiflow-bfarm/2.0.0/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 02 Oct 2026 12:24:28 +0200</pubDate>
+    </item>
+    <item>
+      <title>de.gematik.tiflow.diga#2.0.0</title>
+      <description>TIFlow - Verordnungen f&#252;r Digitale Gesundheitsanwendungen (DiGA) 2.0.0</description>
+      <link>https://gematik.de/fhir/tiflow-diga/2.0.0/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/tiflow-diga/2.0.0/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 02 Oct 2026 12:31:12 +0200</pubDate>
+    </item>
+    <item>
+      <title>de.gematik.tiflow.chargeitem#2.0.0</title>
+      <description>TIFlow - Abrechnungsinformationen 2.0.0</description>
+      <link>https://gematik.de/fhir/tiflow-chargeitem/2.0.0/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/tiflow-chargeitem/2.0.0/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 02 Oct 2026 12:40:53 +0200</pubDate>
+    </item>
+    <item>
+      <title>de.gematik.tiflow.erezept#2.0.0</title>
+      <description>TIFlow - Verordnungen f&#252;r Arzneimittel 2.0.0</description>
+      <link>https://gematik.de/fhir/tiflow-erezept/2.0.0/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/tiflow-erezept/2.0.0/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Fri, 02 Oct 2026 12:53:25 +0200</pubDate>
     </item>
   </channel>
 </rss>
