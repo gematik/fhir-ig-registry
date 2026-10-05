@@ -619,7 +619,7 @@
                     "description": "Dieser IG Beschreibt Schnittstellen und Profile für den Datenaustauch des digitalen Durchschlag E-T-Rezept zwischen E-Rezept-Fachdienst und BfArM T-Register in Version 1.1.1"
                 },
                 {
-                    "name": "eRP-T-Rezept 1.2.0",
+                    "name": "E-Rezept",
                     "ig-version": "1.2.0",
                     "package": "de.gematik.erp-t-prescription#1.2.0",
                     "fhir-version": [
@@ -937,6 +937,46 @@
                     ],
                     "url": "https://gematik.de/fhir/tiflow-erezept/2.0.0",
                     "description": "Implementation Guide TIFlow - Verordnungen für Arzneimittel 2.0.0"
+                }
+            ]
+        },
+        {
+            "name": "E-Rezept ServiceRequest",
+            "category": "gematik",
+            "npm-name": "de.gematik.erp-servicerequest",
+            "description": "E-Rezept ServiceRequest",
+            "canonical": "https://gematik.de/fhir/erp-servicerequest",
+            "ci-build": "https://gematik.de/fhir/erp-servicerequest/build",
+            "editions": [
+                {
+                    "name": "E-Rezept",
+                    "ig-version": "1.2.0",
+                    "package": "de.gematik.erp-servicerequest#1.2.0",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/erp-servicerequest/1.2.0",
+                    "description": "E-Rezept ServiceRequest"
+                }
+            ]
+        },
+        {
+            "name": "App Transport Framework",
+            "category": "gematik",
+            "npm-name": "de.gematik.fhir.atf",
+            "description": "App Transport Framework",
+            "canonical": "https://gematik.de/fhir/atf",
+            "ci-build": "https://gematik.de/fhir/atf/build",
+            "editions": [
+                {
+                    "name": "E-Rezept",
+                    "ig-version": "1.4.1",
+                    "package": "de.gematik.fhir.atf#1.4.1",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/atf/1.4.1",
+                    "description": "App Transport Framework"
                 }
             ]
         }
