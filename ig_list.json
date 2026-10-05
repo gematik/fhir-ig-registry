@@ -841,7 +841,7 @@
             ]
         },
         {
-            "name": "Implementation Guide TIFlow - Kernfunktionalitäten",
+            "name": "TIFlow - Kernfunktionalitäten",
             "category": "gematik",
             "npm-name": "de.gematik.tiflow",
             "description": "Implementation Guide TIFlow - Kernfunktionalitäten",
@@ -856,12 +856,12 @@
                         "4.0.1"
                     ],
                     "url": "https://gematik.de/fhir/tiflow/2.0.0",
-                    "description": "TIFlow - Kernfunktionalitäten 2.0.0"
+                    "description": "Implementation Guide TIFlow - Kernfunktionalitäten 2.0.0"
                 }
             ]
         },
         {
-            "name": "Implementation Guide TIFlow - Datenaustausch BfArM Webdienst",
+            "name": "TIFlow - Datenaustausch BfArM Webdienst",
             "category": "gematik",
             "npm-name": "de.gematik.tiflow.bfarm",
             "description": "Implementation Guide TIFlow - Datenaustausch BfArM Webdienst",
@@ -881,7 +881,7 @@
             ]
         },
         {
-            "name": "Implementation Guide TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA)",
+            "name": "TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA)",
             "category": "gematik",
             "npm-name": "de.gematik.tiflow.diga",
             "description": "Implementation Guide TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA)",
@@ -896,12 +896,12 @@
                         "4.0.1"
                     ],
                     "url": "https://gematik.de/fhir/tiflow-diga/2.0.0",
-                    "description": "TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA) 2.0.0"
+                    "description": "Implementation Guide TIFlow - Verordnungen für Digitale Gesundheitsanwendungen (DiGA) 2.0.0"
                 }
             ]
         },
         {
-            "name": "Implementation Guide TIFlow - Abrechnungsinformationen",
+            "name": "TIFlow - Abrechnungsinformationen",
             "category": "gematik",
             "npm-name": "de.gematik.tiflow.chargeitem",
             "description": "Implementation Guide TIFlow - Abrechnungsinformationen",
@@ -916,12 +916,12 @@
                         "4.0.1"
                     ],
                     "url": "https://gematik.de/fhir/tiflow-chargeitem/2.0.0",
-                    "description": "TIFlow - Abrechnungsinformationen 2.0.0"
+                    "description": "Implementation Guide TIFlow - Abrechnungsinformationen 2.0.0"
                 }
             ]
         },
         {
-            "name": "Implementation Guide TIFlow - Verordnungen für Arzneimittel",
+            "name": "TIFlow - Verordnungen für Arzneimittel",
             "category": "gematik",
             "npm-name": "de.gematik.tiflow.erezept",
             "description": "Implementation Guide TIFlow - Verordnungen für Arzneimittel",
@@ -936,7 +936,7 @@
                         "4.0.1"
                     ],
                     "url": "https://gematik.de/fhir/tiflow-erezept/2.0.0",
-                    "description": "TIFlow - Verordnungen für Arzneimittel 2.0.0"
+                    "description": "Implementation Guide TIFlow - Verordnungen für Arzneimittel 2.0.0"
                 }
             ]
         }
