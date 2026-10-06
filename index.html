@@ -1,1039 +1,1839 @@
-<html>
-
+<!doctype html>
+<html lang="de">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IG List</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
+    :root {
+        color-scheme: light;
+        --ink: #172c3b;
+        --muted: #526774;
+        --accent: #285c96;
+        --line: #dbe4e4;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
     body {
-        font-family: verdana;
-        font-size: 12px;
-        width: 100%;
-        word-wrap: break-word;
-    }
-
-    table {
-        width: 100%;
-        background-color: transparent;
-        border-spacing: 0;
-    }
-
-    tr {
-        text-align: left;
-    }
-
-    table.history-grid {
-        font-size: 12px;
-        margin-bottom: 10px;
-        border: 1px solid silver;
-    }
-
-    table.history-grid th {
-        border: 1px solid silver;
-        padding: 3px;
-    }
-
-    table.history-grid td {
-        border: 1px solid silver;
-        padding: 3px;
-    }
-
-    table.history-grid tr.sequence {
-        background-color: #f9f9f9;
-        font-weight: bold;
-    }
-
-    thead {
-        background-color: #efefef;
+        margin: 0;
+        background: #fafbfc;
+        color: var(--ink);
+        font: 15px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        overflow-wrap: anywhere;
     }
 
     .container {
-        padding-left: 20%;
-        padding-right: 20%;
+        max-width: 1060px;
+        margin: auto;
+        padding: 24px 24px 64px;
+    }
+
+    .brand-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 0 24px;
+    }
+
+    .brand-header img {
+        display: block;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: left;
+    }
+
+    .brand-caption {
+        color: var(--muted);
+        font-size: .75rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+    }
+
+    .page-header {
+        background: #6577a0;
+        color: white;
+        border-radius: 10px;
+        padding: 28px 32px;
+        margin-bottom: 28px;
+        border-bottom: 2px solid #7292b8;
+    }
+
+    .page-header .muted {
+        color: #dbe5f3;
+        max-width: 1005px;
+    }
+
+    .eyebrow {
+        color: #c4ddfb;
+        font-size: .75rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        font-weight: 650;
+    }
+
+    h1 {
+        font-size: clamp(1.8rem, 5vw, 2.6rem);
+        line-height: 1.15;
+        letter-spacing: -.035em;
+        margin: 8px 0 12px;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    h3, h4 {
+        font-size: .85rem;
+        margin: 0;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+    }
+
+    a:hover {
+        text-decoration-thickness: 2px;
+    }
+
+    a:focus-visible, summary:focus-visible {
+        outline: 3px solid #2864bd;
+        outline-offset: 4px;
+        border-radius: 3px;
+    }
+
+    .muted, .metadata, .package-id {
+        color: var(--muted);
+    }
+
+    .metadata {
+        font-size: .8rem;
+    }
+
+    .package-list {
+        display: grid;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 20px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+    }
+
+    .package-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px 20px;
+        flex-wrap: wrap;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .package-title {
+        font-size: 1.1rem;
+    }
+
+    .package-id {
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: .8rem;
+        margin: 0;
+    }
+
+    .card-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        display: inline-block;
+        background: #edf3fc;
+        color: #244e81;
+        border: 1px solid #cedbef;
+        border-radius: 5px;
+        padding: 3px 10px;
+        font: 650 .85rem/1.4 ui-monospace, monospace;
+        text-decoration: none;
+    }
+
+    .release-channel {
+        padding-top: 12px;
+    }
+
+    .release-channel.preview {
+        border-top: 1px dashed var(--line);
+        margin-top: 12px;
+    }
+
+    .preview .badge {
+        background: #fff1da;
+        border-color: #eed5ae;
+        color: #785019;
+    }
+
+    .edition-row {
+        display: grid;
+        grid-template-columns: 150px minmax(0, 1fr);
+        gap: 16px;
+        padding: 6px 0;
+    }
+
+    .edition-row.single-ig {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .edition-version {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .status-label {
+        color: var(--muted);
+        font-size: .72rem;
+    }
+
+    details {
+        margin-top: 8px;
+    }
+
+    summary {
+        cursor: pointer;
+        color: var(--accent);
+        font-size: .85rem;
+        font-weight: 600;
+        padding: 8px 0;
+    }
+
+    .count {
+        display: inline-block;
+        background: #edf2f1;
+        color: var(--muted);
+        border-radius: 5px;
+        padding: 0 6px;
+        margin-left: 4px;
+        font-size: .75rem;
+    }
+
+    .version-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .version-list li {
+        border-top: 1px solid var(--line);
+        padding: 8px 0;
+    }
+
+    .release-channel > .version-list > li:first-child {
+        border-top: 0;
+    }
+
+    .history-channel {
+        margin: 0 0 16px 14px;
+        position: relative;
+        border-left: 3px solid #668db8;
+    }
+
+    .history-channel::before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 24px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #668db8;
+        border: 3px solid #fafbfc;
+    }
+
+    .history-channel.preview {
+        border-left-color: #c99b54;
+    }
+
+    .history-channel.preview::before {
+        background: #c99b54;
+    }
+
+    .history-channel > .metadata {
+        margin-top: 10px;
+    }
+
+    .build-card {
+        margin-bottom: 24px;
+        background: #f5f7fb;
+        border-color: #d6dfec;
+    }
+
+    .build-path {
+        font: .8rem/1.5 ui-monospace, monospace;
+    }
+
+    .package-family {
+        margin-bottom: 32px;
+        padding: 0 14px 14px;
+        background: white;
+        border: 1px solid #d6dfec;
+        border-radius: 10px;
+    }
+
+    .package-family .package-list {
+        gap: 12px;
+    }
+
+    .family-heading {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 16px 20px;
+        margin: -1px -15px 14px;
+        background: #6577a0;
+        color: white;
+        border-radius: 5px 5px 0 0;
+        border-left: 2px solid #7292b8;
+    }
+
+    .family-heading h2 {
+        font: 700 1.1rem/1.4 ui-monospace, monospace;
+    }
+
+    .family-heading .count {
+        background: #41638b;
+        color: #edf3fc;
+        padding: 2px 8px;
+    }
+
+    .ig-list-page .release-channel.preview {
+        margin-top: 8px;
+        padding-top: 8px;
+        font-size: .8rem;
+    }
+
+    .ig-list-page .preview h4 {
+        color: #785019;
+        font-size: .75rem;
+    }
+
+    .ig-list-page .preview .badge {
+        font-size: .75rem;
+        padding: 2px 7px;
+    }
+
+    .ig-list-page .preview .metadata {
+        font-size: .72rem;
+    }
+
+    .ig-list-page .preview .edition-row {
+        padding: 3px 0;
+        gap: 12px;
+    }
+
+    .ig-list-page .preview .version-list li {
+        padding: 4px 0;
+    }
+
+    .ig-list-page .preview summary {
+        font-size: .75rem;
+        padding: 5px 0;
+    }
+
+    .release-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+    }
+
+    .ig-name {
+        font-size: .85rem;
+        font-weight: 600;
+    }
+
+    .preview .ig-name {
+        font-size: .75rem;
+    }
+
+    .package-family, .card, .page-header {
+        box-shadow: none;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 16px 14px 40px;
+        }
+
+        .brand-caption {
+            display: none;
+        }
+
+        .page-header {
+            padding: 22px;
+        }
+
+        .card {
+            padding: 16px;
+        }
+
+        .edition-row {
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .edition-version {
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .package-family {
+            padding: 0 8px 8px;
+        }
+
+        .family-heading {
+            margin: -1px -9px 10px;
+            padding: 12px 14px;
+        }
+    }
+
+    @media print {
+        body {
+            background: white;
+        }
+
+        .container {
+            max-width: none;
+            padding: 0;
+        }
+
+        .page-header {
+            background: white;
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
+        .page-header .muted, .eyebrow {
+            color: var(--muted);
+        }
+
+        .card {
+            break-inside: avoid;
+        }
+
+        .package-family {
+            background: white;
+        }
+
+        .family-heading {
+            background: #edf2f1;
+            color: var(--ink);
+        }
+
+        .family-heading .count {
+            background: white;
+            color: var(--muted);
+        }
+    }
+
+    .page-footer {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: .75rem;
+    }
+    .history-intro {
+        margin-bottom: 16px;
+    }
+
+    .history-table-wrapper {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+    }
+
+    .publication-table {
+        width: 100%;
+        min-width: 700px;
+        border-collapse: collapse;
+        font-size: .85rem;
+        text-align: left;
+    }
+
+    .publication-table th,
+    .publication-table td {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+    }
+
+    .publication-table thead {
+        background: #e8eff9;
+        color: #244e81;
+    }
+
+    .publication-table td:first-child {
+        white-space: nowrap;
+    }
+
+    .publication-table td:nth-child(4) {
+        width: 45%;
+    }
+
+    .publication-group {
+        background: #50739d;
+        color: white;
+    }
+
+    .publication-table .publication-group th {
+        padding: 10px 12px;
+    }
+
+    .group-status {
+        font-weight: 400;
+    }
+
+    .publication-status {
+        display: block;
+        margin-top: 5px;
+        color: #785019;
+        font-size: .75rem;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+    .publication-group.preview-group {
+        background: #fff1da;
+        color: #785019;
+    }
+    .history-section {
+        margin: 28px 0;
+        padding: 20px;
+        background: white;
+        border: 1px solid var(--line);
+        border-top: 4px solid #7292b8;
+        border-radius: 10px;
+    }
+
+    .history-section > h2 {
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+    }
+
+    .history-section > p {
+        margin-bottom: 16px;
+    }
+
+    .history-previews {
+        border-top-color: #c99b54;
+    }
+
+    @media (max-width: 600px) {
+        .history-section {
+            padding: 14px;
+        }
     }
 </style>
 </head>
-
 <body>
-    <div class="container">
+<main class="container ig-list-page">
+    <div class="brand-header"><a href="https://www.gematik.de/" aria-label="gematik Startseite"><img src="https://gemspec.gematik.de/ig/assets/logo.svg" alt="gematik" width="180" height="60"></a><!--span class="brand-caption">FHIR · Package Publication</span--></div>
+    <header class="page-header">
+        <p class="eyebrow">Implementation Guides</p>
+        <h1>FHIR Paketübersicht</h1>
+        <p class="muted">Diese Seite bietet eine Übersicht über die von der gematik veröffentlichten FHIR-Packages. Neben den aktuellen Releases werden auch Vorabversionen wie Ballots und Release Candidates dargestellt.</p>
+    </header>
+    
+    
+    <section class="package-family" aria-labelledby="family-1">
+        <div class="family-heading"><h2 id="family-1">de.gematik.epa</h2><span class="count">4 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">ePA Basic</h3>
+        <p class="package-id">de.gematik.epa</p></div>
         
-        <h1>E-Rezept</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">E-Rezept</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/atf/1.4.1">App Transport Framework</a></td>
-                    <td><a href="https://gematik.de/fhir/atf/1.4.1">1.4.1</a></td>
-                    <td>App Transport Framework</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/erp-servicerequest/1.2.0">E-Rezept ServiceRequest</a></td>
-                    <td><a href="https://gematik.de/fhir/erp-servicerequest/1.2.0">1.2.0</a></td>
-                    <td>E-Rezept ServiceRequest</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/erp-t-prescription/1.2.0">E-T-Rezept Datenaustausch</a></td>
-                    <td><a href="https://gematik.de/fhir/erp-t-prescription/1.2.0">1.2.0</a></td>
-                    <td>Dieser IG Beschreibt Schnittstellen und Profile f&uuml;r den Datenaustauch des digitalen Durchschlag E-T-Rezept zwischen E-Rezept-Fachdienst und BfArM T-Register in Version 1.2.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.3.2">1.3.2</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>ePA</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ePA 3.1.3</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.3.2">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.3.2">1.3.2</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.3.2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.3.1">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.3.1">1.3.1</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.3.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.3.0">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.3.0">1.3.0</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.3.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.2.0">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.2.0">1.2.0</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.2.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.5">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.5">1.3.5</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.3.5</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.4">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.4">1.3.4</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.3.4</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.3">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.3">1.3.3</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.3.3</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.2">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.2">1.3.2</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.3.2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.1">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.1">1.3.1</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.3.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.0">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.3.0">1.3.0</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.3.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.2.0">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.2.0">1.2.0</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.2.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.3">IG ePA MHD Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.3">1.1.3</a></td>
-                    <td>Implementation Guide ePA MHD Service Version 1.1.3</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.2">IG ePA MHD Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.2">1.1.2</a></td>
-                    <td>Implementation Guide ePA MHD Service Version 1.1.2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.1">IG ePA MHD Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.1">1.1.1</a></td>
-                    <td>Implementation Guide ePA MHD Service Version 1.1.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.0">IG ePA MHD Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.1.0">1.1.0</a></td>
-                    <td>Implementation Guide ePA MHD Service Version 1.1.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.0.1">IG ePA MHD Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.0.1">1.0.1</a></td>
-                    <td>Implementation Guide ePA MHD Service Version 1.0.1</td>
-                </tr>
-                
-                
-                <tr class="sequence">
-                    <td colspan="4">ePA 3.1.2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.1.5">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.1.5">1.1.5</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.1.5</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.1.5">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.1.5">1.1.5</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.1.5</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.0.0">IG ePA MHD Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-mhd/1.0.0">1.0.0</a></td>
-                    <td>Implementation Guide ePA MHD Service Version 1.0.0</td>
-                </tr>
-                
-                
-                <tr class="sequence">
-                    <td colspan="4">ePA 3.0.5-2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.6-2">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.6-2">1.0.6-2</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.6-2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.6-1">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.6-1">1.0.6-1</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.6-1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.6">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.6">1.0.6</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.6</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.6-2">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.6-2">1.0.6-2</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.0.6-2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.6-1">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.6-1">1.0.6-1</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.0.6-1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.6">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.6">1.0.6</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.0.6</td>
-                </tr>
-                
-                
-                <tr class="sequence">
-                    <td colspan="4">ePA 3.0.5</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.5">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.0.5">1.0.5</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.5</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.5">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.0.5">1.0.5</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.0.5</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.3.2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>ePA Vorabver&ouml;ffentlichung</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ePA Vorabver&ouml;ffentlichung 3.1.3</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.2.0-ballot.2">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.2.0-ballot.2">1.2.0-ballot.2</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.2.0-ballot.2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa/1.2.0-ballot.1">ePA Basic</a></td>
-                    <td><a href="https://gematik.de/fhir/epa/1.2.0-ballot.1">1.2.0-ballot.1</a></td>
-                    <td>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.2.0-ballot.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.2.0-ballot.2">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.2.0-ballot.2">1.2.0-ballot.2</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.2.0-ballot.2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.2.0-ballot.1">IG ePA Medication Service</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-medication/1.2.0-ballot.1">1.2.0-ballot.1</a></td>
-                    <td>Implementation Guide ePA Medication Service Version 1.2.0-ballot.1</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    
+            
+            <details><summary>Ältere Veröffentlichungen <span class="count">8</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.3.1">1.3.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>ePA 3.2.0 (ePA</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ePA 3.2.0 (ePA 27)</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/epa-laboratory/1.0.0-ballot.1">ePA Laboratory Report Implementation Guide</a></td>
-                    <td><a href="https://gematik.de/fhir/epa-laboratory/1.0.0-ballot.1">1.0.0-ballot.1</a></td>
-                    <td>ePA Laboratory Report Implementation Guide Version 1.0.0-ballot.1</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.3.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>eRP-T-Rezept</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">eRP-T-Rezept 1.1.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/erp-t-prescription/1.1.1">E-T-Rezept Datenaustausch</a></td>
-                    <td><a href="https://gematik.de/fhir/erp-t-prescription/1.1.1">1.1.1</a></td>
-                    <td>Dieser IG Beschreibt Schnittstellen und Profile f&uuml;r den Datenaustauch des digitalen Durchschlag E-T-Rezept zwischen E-Rezept-Fachdienst und BfArM T-Register in Version 1.1.1</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.3.0">1.3.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>HDDT</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">HDDT 1.0.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.1">Health Data Device Transfer</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.1">1.0.1</a></td>
-                    <td>Implementation Guide HDDT Version 1.0.1</td>
-                </tr>
-                
-                
-                <tr class="sequence">
-                    <td colspan="4">HDDT 1.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0">Health Data Device Transfer</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0">1.0.0</a></td>
-                    <td>Implementation Guide HDDT Version 1.0.0</td>
-                </tr>
-                
-                
-                <tr class="sequence">
-                    <td colspan="4">HDDT 0.1.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/0.1.0">Health Data Device Transfer</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/0.1.0">0.1.0</a></td>
-                    <td>Implementation Guide HDDT Version 0.1.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.3.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>HDDT 1.0.0-rc1</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">HDDT 1.0.0-rc1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc1">Health Data Device Transfer</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc1">1.0.0-rc1</a></td>
-                    <td>Implementation Guide HDDT Version 1.0.0-rc1</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.2.0">1.2.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>HDDT 1.0.0-rc2</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">HDDT 1.0.0-rc2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc2">Health Data Device Transfer</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc2">1.0.0-rc2</a></td>
-                    <td>Implementation Guide HDDT Version 1.0.0-rc2</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.2.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>ISiK AMTS</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK AMTS 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/amts/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/amts/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK AMTS-Modul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.1.5">1.1.5</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>ISiK Basis</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Basis 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/basis/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/basis/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Basis Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.1.5</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>ISiK Connect</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Connect 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/connect/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/connect/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Connect-Modul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.0.6">1.0.6</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>ISiK Dokumentenaustausch</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Dokumentenaustausch 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/dokumentenaustausch/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/dokumentenaustausch/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Dokumentenaustauschmodul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.6</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5-2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>ISiK Formular</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Formular 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/formular/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/formular/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Formular-Modul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.0.6-2">1.0.6-2</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>ISiK ICU</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK ICU 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/icu/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/icu/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK ICU-Normalstation-Modul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.6-2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5-2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>ISiK Labor</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Labor 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/labor/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/labor/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Labormodul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.0.6-1">1.0.6-1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>ISiK Medikation</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Medikation 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/medikation/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/medikation/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Medikationsmodul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.6-1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5-2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>ISiK Organspendeerkennung</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Organspendeerkennung 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/organspendeerkennung/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/organspendeerkennung/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Organspendeerkennung Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.0.5">1.0.5</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
         
-        <h1>ISiK Subscriptions</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Subscriptions 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/subscriptions/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/subscriptions/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Subscription-Modul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.0.5</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>ISiK Terminplanung</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Terminplanung 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/terminplanung/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/terminplanung/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Terminplanungsmodul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li></ul>
+            </details>
+            
+        </section>
         
-        <h1>ISiK Vitalparameter</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">ISiK Vitalparameter 6.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/vitalparameter/6.0.0">ISiK</a></td>
-                    <td><a href="https://gemspec.gematik.de/fhir/ig/isik/vitalparameter/6.0.0">6.0.0</a></td>
-                    <td>Implementation Guide ISiK Vitalparametermodul Version 6.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
         
-        <h1>TI</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">TI</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.1.0-ballot.1">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.1.0-ballot.1">1.1.0-ballot.1</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.1.0-ballot.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.9-1">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.9-1">1.0.9-1</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.9-1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.9">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.9">1.0.9</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.9</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.8">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.8">1.0.8</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.8</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.7">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.7">1.0.7</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.7</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.6">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.6">1.0.6</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.6</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-4">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-4">1.0.5-4</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.5-4</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-3">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-3">1.0.5-3</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.5-3</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-2">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-2">1.0.5-2</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.5-2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-1">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5-1">1.0.5-1</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.5-1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5">IG TI Terminology</a></td>
-                    <td><a href="https://gematik.de/fhir/terminology/1.0.5">1.0.5</a></td>
-                    <td>Implementation Guide TI Terminology Version 1.0.5</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0">1.4.0</a></td>
-                    <td>Implementation Guide TI Common Version 1.4.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.3.1">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.3.1">1.3.1</a></td>
-                    <td>TI Common IG 1.3.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.3.0">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.3.0">1.3.0</a></td>
-                    <td>TI Common IG 1.3.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.2.0">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.2.0">1.2.0</a></td>
-                    <td>TI Common IG 1.2.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.1.1">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.1.1">1.1.1</a></td>
-                    <td>TI Common IG 1.1.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.1.0">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.1.0">1.1.0</a></td>
-                    <td>TI Common IG 1.1.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.0.1">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.0.1">1.0.1</a></td>
-                    <td>TI Common IG 1.0.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.0.0">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.0.0">1.0.0</a></td>
-                    <td>TI Common IG 1.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <section class="release-channel preview">
+            <h4>Ballot</h4>
+            <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.2.0-ballot.2">1.2.0-ballot.2</a>
+            <span class="status-label">Ballot</span>
+        </div>
         
-        <h1>TI Vorabver&ouml;ffentlichung</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">TI Vorabver&ouml;ffentlichung</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.5.0-ballot.1">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.5.0-ballot.1">1.5.0-ballot.1</a></td>
-                    <td>Implementation Guide TI Common Version 1.5.0-ballot.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0-rc.1">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0-rc.1">1.4.0-rc.1</a></td>
-                    <td>Implementation Guide TI Common Version 1.4.0-rc.1</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0-ballot.3">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0-ballot.3">1.4.0-ballot.3</a></td>
-                    <td>Implementation Guide TI Common Version 1.4.0-ballot.3</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0-ballot.2">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.4.0-ballot.2">1.4.0-ballot.2</a></td>
-                    <td>TI Common IG 1.4.0-ballot.2</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/ti/1.1.1-ballot.1">TI Common</a></td>
-                    <td><a href="https://gematik.de/fhir/ti/1.1.1-ballot.1">1.1.1-ballot.1</a></td>
-                    <td>TI Common IG 1.1.1-ballot.1</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.2.0-ballot.2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA Vorabver&ouml;ffentlichung 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
         
-        <h1>TIFlow</h1>
-
-        <table class="history-grid">
-            <thead>
-                <tr>
-                    <th width="100px">IG</th>
-                    <th width="100px">Version</th>
-                    <th>Beschreibung</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr class="sequence">
-                    <td colspan="4">TIFlow</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/tiflow-chargeitem/2.0.0">TIFlow - Abrechnungsinformationen</a></td>
-                    <td><a href="https://gematik.de/fhir/tiflow-chargeitem/2.0.0">2.0.0</a></td>
-                    <td>Implementation Guide TIFlow - Abrechnungsinformationen 2.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/tiflow-bfarm/2.0.0">TIFlow - Datenaustausch BfArM Webdienst</a></td>
-                    <td><a href="https://gematik.de/fhir/tiflow-bfarm/2.0.0">2.0.0</a></td>
-                    <td>TIFlow - Datenaustausch BfArM Webdienst 2.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/tiflow/2.0.0">TIFlow - Kernfunktionalit&auml;ten</a></td>
-                    <td><a href="https://gematik.de/fhir/tiflow/2.0.0">2.0.0</a></td>
-                    <td>Implementation Guide TIFlow - Kernfunktionalit&auml;ten 2.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/tiflow-erezept/2.0.0">TIFlow - Verordnungen f&uuml;r Arzneimittel</a></td>
-                    <td><a href="https://gematik.de/fhir/tiflow-erezept/2.0.0">2.0.0</a></td>
-                    <td>Implementation Guide TIFlow - Verordnungen f&uuml;r Arzneimittel 2.0.0</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="https://gematik.de/fhir/tiflow-diga/2.0.0">TIFlow - Verordnungen f&uuml;r Digitale Gesundheitsanwendungen (DiGA)</a></td>
-                    <td><a href="https://gematik.de/fhir/tiflow-diga/2.0.0">2.0.0</a></td>
-                    <td>Implementation Guide TIFlow - Verordnungen f&uuml;r Digitale Gesundheitsanwendungen (DiGA) 2.0.0</td>
-                </tr>
-                
-                
-            </tbody>
-        </table>
+    </li></ul>
+            
+            <details><summary>Ältere Ballot-Versionen <span class="count">1</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa/1.2.0-ballot.1">1.2.0-ballot.1</a>
+            <span class="status-label">Ballot</span>
+        </div>
         
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Basisfunktionalit&auml;te Version 1.2.0-ballot.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA Vorabver&ouml;ffentlichung 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+    </article>
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">ePA Laboratory Report Implementation Guide</h3>
+        <p class="package-id">de.gematik.epa.laboratory</p></div>
+        
+        <p class="muted">Noch keine reguläre Veröffentlichung.</p>
+        
+        
+        <section class="release-channel preview">
+            <h4>Ballot</h4>
+            <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-laboratory/1.0.0-ballot.1">1.0.0-ballot.1</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>ePA Laboratory Report Implementation Guide Version 1.0.0-ballot.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.2.0 (ePA 27)</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            
+        </section>
+        
+    </article>
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">IG ePA Medication Service</h3>
+        <p class="package-id">de.gematik.epa.medication</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.3.5">1.3.5</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.3.5</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+            <details><summary>Ältere Veröffentlichungen <span class="count">11</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.3.4">1.3.4</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.3.4</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.3.3">1.3.3</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.3.3</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.3.2">1.3.2</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.3.2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.3.1">1.3.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.3.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.3.0">1.3.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.3.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.2.0">1.2.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.2.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.1.5">1.1.5</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.1.5</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.0.6">1.0.6</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.0.6</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5-2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.0.6-2">1.0.6-2</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.0.6-2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5-2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.0.6-1">1.0.6-1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.0.6-1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5-2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.0.5">1.0.5</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.0.5</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.0.5</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+        
+        <section class="release-channel preview">
+            <h4>Ballot</h4>
+            <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.2.0-ballot.2">1.2.0-ballot.2</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.2.0-ballot.2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA Vorabver&ouml;ffentlichung 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            
+            <details><summary>Ältere Ballot-Versionen <span class="count">1</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-medication/1.2.0-ballot.1">1.2.0-ballot.1</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA Medication Service Version 1.2.0-ballot.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA Vorabver&ouml;ffentlichung 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+    </article>
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">IG ePA MHD Service</h3>
+        <p class="package-id">de.gematik.epa.mhd</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-mhd/1.1.3">1.1.3</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA MHD Service Version 1.1.3</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+            <details><summary>Ältere Veröffentlichungen <span class="count">5</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-mhd/1.1.2">1.1.2</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA MHD Service Version 1.1.2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-mhd/1.1.1">1.1.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA MHD Service Version 1.1.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-mhd/1.1.0">1.1.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA MHD Service Version 1.1.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-mhd/1.0.1">1.0.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA MHD Service Version 1.0.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.3</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/epa-mhd/1.0.0">1.0.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide ePA MHD Service Version 1.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: ePA 3.1.2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+        
+    </article>
+    
     </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-2">
+        <div class="family-heading"><h2 id="family-2">de.gematik.erp-servicerequest</h2><span class="count">1 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">E-Rezept ServiceRequest</h3>
+        <p class="package-id">de.gematik.erp-servicerequest</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/erp-servicerequest/1.2.0">1.2.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>E-Rezept ServiceRequest</p>
+                <p class="metadata"><span class="sequence-label">Sequence: E-Rezept</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-3">
+        <div class="family-heading"><h2 id="family-3">de.gematik.erp-t-prescription</h2><span class="count">1 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">E-T-Rezept Datenaustausch</h3>
+        <p class="package-id">de.gematik.erp-t-prescription</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/erp-t-prescription/1.2.0">1.2.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Dieser IG Beschreibt Schnittstellen und Profile f&uuml;r den Datenaustauch des digitalen Durchschlag E-T-Rezept zwischen E-Rezept-Fachdienst und BfArM T-Register in Version 1.2.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: E-Rezept</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+            <details><summary>Ältere Veröffentlichungen <span class="count">1</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/erp-t-prescription/1.1.1">1.1.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Dieser IG Beschreibt Schnittstellen und Profile f&uuml;r den Datenaustauch des digitalen Durchschlag E-T-Rezept zwischen E-Rezept-Fachdienst und BfArM T-Register in Version 1.1.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: eRP-T-Rezept 1.1.1</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-4">
+        <div class="family-heading"><h2 id="family-4">de.gematik.fhir.atf</h2><span class="count">1 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">App Transport Framework</h3>
+        <p class="package-id">de.gematik.fhir.atf</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/atf/1.4.1">1.4.1</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>App Transport Framework</p>
+                <p class="metadata"><span class="sequence-label">Sequence: E-Rezept</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-5">
+        <div class="family-heading"><h2 id="family-5">de.gematik.hddt</h2><span class="count">1 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">Health Data Device Transfer</h3>
+        <p class="package-id">de.gematik.hddt</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.1">1.0.1</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide HDDT Version 1.0.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: HDDT 1.0.1</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+            <details><summary>Ältere Veröffentlichungen <span class="count">2</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0">1.0.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide HDDT Version 1.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: HDDT 1.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gemspec.gematik.de/fhir/ig/hddt/0.1.0">0.1.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide HDDT Version 0.1.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: HDDT 0.1.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+        
+        <section class="release-channel preview">
+            <h4>Release Candidate</h4>
+            <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc2">1.0.0-rc2</a>
+            <span class="status-label">Release Candidate</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide HDDT Version 1.0.0-rc2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: HDDT 1.0.0-rc2</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            
+            <details><summary>Ältere Release Candidate-Versionen <span class="count">1</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gemspec.gematik.de/fhir/ig/hddt/1.0.0-rc1">1.0.0-rc1</a>
+            <span class="status-label">Release Candidate</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide HDDT Version 1.0.0-rc1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: HDDT 1.0.0-rc1</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-6">
+        <div class="family-heading"><h2 id="family-6">de.gematik.isik</h2><span class="count">1 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">ISiK</h3>
+        <p class="package-id">de.gematik.isik</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <span class="badge">6.0.0</span>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/amts/6.0.0">Implementation Guide ISiK AMTS-Modul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK AMTS 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/basis/6.0.0">Implementation Guide ISiK Basis Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Basis 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/connect/6.0.0">Implementation Guide ISiK Connect-Modul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Connect 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/dokumentenaustausch/6.0.0">Implementation Guide ISiK Dokumentenaustauschmodul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Dokumentenaustausch 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/formular/6.0.0">Implementation Guide ISiK Formular-Modul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Formular 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/icu/6.0.0">Implementation Guide ISiK ICU-Normalstation-Modul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK ICU 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/labor/6.0.0">Implementation Guide ISiK Labormodul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Labor 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/medikation/6.0.0">Implementation Guide ISiK Medikationsmodul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Medikation 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/organspendeerkennung/6.0.0">Implementation Guide ISiK Organspendeerkennung Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Organspendeerkennung 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/subscriptions/6.0.0">Implementation Guide ISiK Subscription-Modul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Subscriptions 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/terminplanung/6.0.0">Implementation Guide ISiK Terminplanungsmodul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Terminplanung 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p><a class="ig-name" href="https://gemspec.gematik.de/fhir/ig/isik/vitalparameter/6.0.0">Implementation Guide ISiK Vitalparametermodul Version 6.0.0</a></p>
+                <p class="metadata"><span class="sequence-label">Sequence: ISiK Vitalparameter 6.0.0</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-7">
+        <div class="family-heading"><h2 id="family-7">de.gematik.terminology</h2><span class="count">1 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">IG TI Terminology</h3>
+        <p class="package-id">de.gematik.terminology</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.9">1.0.9</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.9</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+            <details><summary>Ältere Veröffentlichungen <span class="count">9</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.9-1">1.0.9-1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.9-1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.8">1.0.8</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.8</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.7">1.0.7</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.7</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.6">1.0.6</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.6</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.5">1.0.5</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.5</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.5-4">1.0.5-4</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.5-4</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.5-3">1.0.5-3</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.5-3</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.5-2">1.0.5-2</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.5-2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.0.5-1">1.0.5-1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.0.5-1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+        
+        <section class="release-channel preview">
+            <h4>Ballot</h4>
+            <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/terminology/1.1.0-ballot.1">1.1.0-ballot.1</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Terminology Version 1.1.0-ballot.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            
+        </section>
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-8">
+        <div class="family-heading"><h2 id="family-8">de.gematik.ti</h2><span class="count">1 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">TI Common</h3>
+        <p class="package-id">de.gematik.ti</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.4.0">1.4.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Common Version 1.4.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+            <details><summary>Ältere Veröffentlichungen <span class="count">7</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.3.1">1.3.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.3.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.3.0">1.3.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.3.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.2.0">1.2.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.2.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.1.1">1.1.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.1.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.1.0">1.1.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.1.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.0.1">1.0.1</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.0.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.0.0">1.0.0</a>
+            <span class="status-label">Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+        
+        <section class="release-channel preview">
+            <h4>Ballot</h4>
+            <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.5.0-ballot.1">1.5.0-ballot.1</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Common Version 1.5.0-ballot.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI Vorabver&ouml;ffentlichung</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            
+            <details><summary>Ältere Ballot-Versionen <span class="count">3</span></summary>
+                <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.4.0-ballot.3">1.4.0-ballot.3</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Common Version 1.4.0-ballot.3</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI Vorabver&ouml;ffentlichung</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.4.0-ballot.2">1.4.0-ballot.2</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.4.0-ballot.2</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI Vorabver&ouml;ffentlichung</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.1.1-ballot.1">1.1.1-ballot.1</a>
+            <span class="status-label">Ballot</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TI Common IG 1.1.1-ballot.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI Vorabver&ouml;ffentlichung</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            </details>
+            
+        </section>
+        
+        <section class="release-channel preview">
+            <h4>Release Candidate</h4>
+            <ul class="version-list"><li>
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/ti/1.4.0-rc.1">1.4.0-rc.1</a>
+            <span class="status-label">Release Candidate</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TI Common Version 1.4.0-rc.1</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TI Vorabver&ouml;ffentlichung</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    </li></ul>
+            
+        </section>
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <section class="package-family" aria-labelledby="family-9">
+        <div class="family-heading"><h2 id="family-9">de.gematik.tiflow</h2><span class="count">5 Pakete</span></div>
+    <div class="package-list">
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">TIFlow - Kernfunktionalit&auml;ten</h3>
+        <p class="package-id">de.gematik.tiflow</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/tiflow/2.0.0">2.0.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TIFlow - Kernfunktionalit&auml;ten 2.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TIFlow</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">TIFlow - Datenaustausch BfArM Webdienst</h3>
+        <p class="package-id">de.gematik.tiflow.bfarm</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/tiflow-bfarm/2.0.0">2.0.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>TIFlow - Datenaustausch BfArM Webdienst 2.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TIFlow</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">TIFlow - Abrechnungsinformationen</h3>
+        <p class="package-id">de.gematik.tiflow.chargeitem</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/tiflow-chargeitem/2.0.0">2.0.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TIFlow - Abrechnungsinformationen 2.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TIFlow</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">TIFlow - Verordnungen f&uuml;r Digitale Gesundheitsanwendungen (DiGA)</h3>
+        <p class="package-id">de.gematik.tiflow.diga</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/tiflow-diga/2.0.0">2.0.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TIFlow - Verordnungen f&uuml;r Digitale Gesundheitsanwendungen (DiGA) 2.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TIFlow</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    <article class="card">
+        <div class="package-heading"><h3 class="package-title">TIFlow - Verordnungen f&uuml;r Arzneimittel</h3>
+        <p class="package-id">de.gematik.tiflow.erezept</p></div>
+        
+        <section class="release-channel stable">
+            
+        <div class="release-heading">
+            <a class="badge" href="https://gematik.de/fhir/tiflow-erezept/2.0.0">2.0.0</a>
+            <span class="status-label">Aktuelle Ver&ouml;ffentlichung</span>
+        </div>
+        
+        <div class="edition-row single-ig">
+            <div><p>Implementation Guide TIFlow - Verordnungen f&uuml;r Arzneimittel 2.0.0</p>
+                <p class="metadata"><span class="sequence-label">Sequence: TIFlow</span> · FHIR 4.0.1</p>
+            </div>
+        </div>
+        
+    
+            
+        </section>
+        
+        
+    </article>
+    
+    </div>
+    </section>
+    
+    <footer class="page-footer">
+    <span>© 2026 gematik</span>
+    <span>Zuletzt aktualisiert: <time datetime="2026-10-06T15:37:28.350470+02:00">06.10.2026, 15:37 Uhr (CEST)</time></span>
+</footer>
+</main>
 </body>
-
 </html>
