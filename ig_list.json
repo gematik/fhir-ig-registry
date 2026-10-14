@@ -377,6 +377,16 @@
                     ],
                     "url": "https://gematik.de/fhir/terminology/1.1.0-ballot.1",
                     "description": "Implementation Guide TI Terminology Version 1.1.0-ballot.1"
+                },
+                {
+                    "name": "TI",
+                    "ig-version": "1.1.0-ballot.2",
+                    "package": "de.gematik.terminology#1.1.0-ballot.2",
+                    "fhir-version": [
+                        "4.0.1"
+                    ],
+                    "url": "https://gematik.de/fhir/terminology/1.1.0-ballot.2",
+                    "description": "Implementation Guide TI Terminology Version 1.1.0-ballot.2"
                 }
             ]
         },
