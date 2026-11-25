@@ -4,7 +4,7 @@
     <description>FHIR Implementation Guides published by gematik GmbH.</description>
     <link>https://gematik.de/fhir/</link>
     <generator>gematik GmbH</generator>
-    <lastBuildDate>Thu, 15 Oct 2026 16:06:05 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 09:31:00 +0100</lastBuildDate>
     <atom:link href="https://gemspec.gematik.de/ig/fhir/package-feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>Fri, 01 Aug 2025 12:44:15 +0000</pubDate>
     <language>en</language>
@@ -352,6 +352,16 @@
       <fhir:version>4.0.1</fhir:version>
       <fhir:kind>IG</fhir:kind>
       <pubDate>Thu, 15 Oct 2026 16:06:05 +0200</pubDate>
+    </item>
+    <item>
+      <title>de.gematik.ti#1.4.1</title>
+      <description>TI Common Version 1.4.1</description>
+      <link>https://gematik.de/fhir/ti/1.4.1/package.tgz</link>
+      <guid isPermaLink="true">https://gematik.de/fhir/ti/1.4.1/package.tgz</guid>
+      <dc:creator>gematik GmbH</dc:creator>
+      <fhir:version>4.0.1</fhir:version>
+      <fhir:kind>IG</fhir:kind>
+      <pubDate>Wed, 25 Nov 2026 09:31:00 +0100</pubDate>
     </item>
   </channel>
 </rss>
